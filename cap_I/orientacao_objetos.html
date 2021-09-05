@@ -1,0 +1,27 @@
+
+<!DOCTYPE html> 
+<html>
+	<head>
+		<script src ="carro.js"></script>
+		<title>Prototype</title>
+	</head>
+	
+	<body>		
+		<script>
+
+			//instanciando objeto da classe Carro
+				var meuCarro = new Carro('red', 250);
+				var oponente = new Carro('green', 300);
+				
+				meuCarro.acelerar();
+
+				document.write(`O carro ${meuCarro.cor} acelerou ${meuCarro.velocAtual}`);
+				document.write('<br>');
+				document.write(`O carro ${oponente.cor} acelerou ${oponente.velocAtual}`);
+	
+		</script>
+	</body>
+
+
+
+</html>

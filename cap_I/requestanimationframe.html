@@ -1,0 +1,64 @@
+
+<!DOCTYPE html> 
+<html>
+	<head>
+		<title>Processando Canvas na seção HEAD</title>
+	</head>
+	<script>
+		window.onload = () => {
+			//trabalharemos aqui
+		}
+	</script>
+	<body>
+		<canvas id="meu_canvas" width="200" height="200">
+			<script>
+				//referenciando canvas
+				var canvas = document.getElementById('meu_canvas');
+
+				//obtedo contexto gráfico
+				var context = canvas.getContext('2d');
+				//dados da bola
+				var x = 20;
+				var y = 100;
+				var raio = 5;
+				
+				//momento inicial 
+				var anterior = new Date().getTime();
+				//iniciar animação
+				requestAnimationFrame(mexerBola);
+
+				//função animação
+				function mexerBola(){
+					//momento atual 
+					var agora = new Date().getTime();
+					//obtendo a diferença 
+					var decorrido = agora - anterior;
+					//limpar o canvas
+					context.clearRect(0, 0, canvas.width, canvas.height);
+
+					//desenhar a bola
+					//novo path 
+					context.beginPath();
+					//desenha 
+					context.arc(x, y, raio, 0, 2*Math.PI, true);
+					//preenchimento
+					context.fill();
+					//contorno
+					context.stroke();
+					//deslocar 20 pixels/s
+					var velocidade = 20;
+					x+= velocidade * decorrido /1000;
+					//chamar próximo ciclo de animação
+					anterior = agora //guardando o instante
+					requestAnimationFrame(mexerBola)
+
+
+				}			
+
+			</script>	
+		</canvas>
+	</body>
+
+
+
+</html>

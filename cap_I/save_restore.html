@@ -1,0 +1,43 @@
+
+<!DOCTYPE html> 
+<html>
+	<head>
+		<title>Processando Canvas na seção HEAD</title>
+	</head>
+	<script>
+		window.onload = () => {
+			//trabalharemos aqui
+		}
+	</script>
+	<body>
+		<canvas id="meu_canvas" width="200" height="200">
+			<script>
+				//referenciando canvas
+				var canvas = document.getElementById('meu_canvas');
+
+				//obtedo contexto gráfico
+				var context = canvas.getContext('2d');
+
+				//criar um quadrado verde 
+				context.fillStyle = 'green';
+				context.fillRect(50, 50, 25, 25);
+
+				//salvando as configurações e subimos na pilha 
+				context.save();
+
+				//criando um quadrado azul 
+				context.fillStyle = 'blue';
+				context.fillRect(50, 50, 25, 25);
+
+				//voltamos para o nivel anterior na pilha
+				context.restore();
+
+				//voltou para verde
+				context.fillRect(150, 50, 25, 25);
+			</script>	
+		</canvas>
+	</body>
+
+
+
+</html>

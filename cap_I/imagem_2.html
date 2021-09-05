@@ -1,5 +1,5 @@
 
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html>
 	<head>
 		<title>Processando Canvas na seção HEAD</title>
@@ -10,7 +10,7 @@
 		}
 	</script>
 	<body>
-		<canvas id="meu_canvas" width="200" height="200"></canvas>
+		<canvas id="meu_canvas" width="200" height="200">
 			<script>
 				//referenciando canvas
 				var canvas = document.getElementById('meu_canvas');
@@ -18,10 +18,19 @@
 				//obtedo contexto gráfico
 				var context = canvas.getContext('2d');
 				
-				//desenhar um retângulo
-				context.fillRect(50, 50, 100, 100); //sobreado
-				context.strokeRect(50, 50, 100, 100); //contorno
+				//carregar a imagem
+				var imagem = new Image();
+				imagem.src = './img/explosao.png';
+				imagem.onload = () => {
+					context.drawImage(
+						imagem,
+						80, 10, 60, 65, //área de recorte(clipping)
+						20, 20, 60, 65 //desenho no canvas
+					);	
+				}
+		
 			</script>	
+		</canvas>
 	</body>
 
 

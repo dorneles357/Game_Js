@@ -18,9 +18,17 @@
 				//obtedo contexto gráfico
 				var context = canvas.getContext('2d');
 				
-				//desenhar um retângulo
-				context.fillRect(50, 50, 100, 100); //sobreado
-				context.strokeRect(50, 50, 100, 100); //contorno
+				//preenchimento vermelho 
+				context.fillStyle = 'red';  
+				context.fillRect(50, 50, 100, 100);
+
+				//contorno azul com expessura 
+				context.lineWidth = 3;
+				context.strokeStyle = 'blue';  
+				context.strokeRect(50, 50, 100, 100);
+
+				
+	
 			</script>	
 	</body>
 

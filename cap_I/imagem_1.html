@@ -1,0 +1,38 @@
+
+<!DOCTYPE html> 
+<html>
+	<head>
+		<title>Processando Canvas na seção HEAD</title>
+	</head>
+	<script>
+		window.onload = () => {
+			//trabalharemos aqui
+		}
+	</script>
+	<body>
+		<canvas id="meu_canvas" width="200" height="200">
+			<script>
+				//referenciando canvas
+				var canvas = document.getElementById('meu_canvas');
+
+				//obtedo contexto gráfico
+				var context = canvas.getContext('2d');
+				//carregar a imagem
+				var imagem = new Image();
+				imagem.src = './img/ovni.png';
+				imagem.onload = () => {
+					//começa na posição 20 
+					var x = 20;
+					//desenhar as imagens
+					for(var i = 1; i <= 5; i++){
+						context.drawImage(imagem, x, 20, 64, 32);
+						x += 70;
+					}
+				}	
+			</script>	
+		</canvas>
+	</body>
+
+
+
+</html>
