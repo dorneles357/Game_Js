@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	
+	<head>
+		<title>Teste com os comandos do teclado</title>
+	</head>
+	<body>
+		<canvas id="canvas_teclado_1" width="500" height="500"></canvas>
+		<script>
+			//referências do canvas
+			var canvas =  document.getElementById('canvas_teclado_1');
+			var context = canvas.getContext('2d');
+
+
+			//posição inicial do personagem
+			var posicao = 0;
+			desenharPersonagem();
+
+			document.addEventListener('keydown', function(evento){
+				if(evento.keyCode == 37){ //para esquerda
+					posicao -= 10;
+					desenharPersonagem();
+				}else if(evento.keyCode == 39){//para direita
+					posicao += 10;
+					desenharPersonagem();
+				}
+			});
+
+		//desenhando personagem
+		function desenharPersonagem(){
+			context.clearRect(0, 0, canvas.width, canvas.height);
+			context.fillRect(posicao, 100, 20, 50);
+		}
+		</script>
+	</body>
+</html>
