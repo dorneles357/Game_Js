@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Recorte e enquadramento</title>
+	</head>
+	
+	<body>
+		<canvas id="canvas_clipping" width="500" height="500"></canvas>
+		<script>
+			//instância da classe
+			var imgMan = new Image();
+			imgMan.src = 'spritesheet.png';
+			imgMan.onload = function(){
+				//valores conforme as sprintesheets 
+				var linhas = 3;
+				var colunas = 8;
+
+				//dimensão de cada quadro
+				var largura = imgMan.width/colunas;
+				var altura = imgMan.height/linhas;
+
+				//quadro que eu quero
+				var queroLinha = 2;
+				var queroColuna = 7;
+
+				//posição de recorte
+				var x = largura*queroColuna;
+				var y = altura*queroLinha;
+        
+				var context = document.getElementById('canvas_clipping').getContext('2d');
+
+				context.drawImage(
+					imgMan,
+					x, 
+					y,
+					largura,
+					altura,
+					100, //posição no canvas
+					100,
+					largura,
+					altura
+				);
+
+			}
+		</script>
+	</body>
+</html>

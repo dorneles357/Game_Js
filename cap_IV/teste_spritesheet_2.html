@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<meta>
+		<title>Personagem controlado e animado</title>
+		<script src="./spritesheet.js"></script>
+		<script src="./man.js"></script>
+		<script src="./teclado.js"></script>
+		<script src="./animacao.js"></script>
+	</meta>
+
+	<body>
+		<canvas id="canvas_man" width="500" height="500"></canvas>
+		<script>
+			//contexto e referência 
+			const canvas = document.getElementById('canvas_man');
+			const context = canvas.getContext('2d');
+			
+
+
+			//instâncias das classses 
+			const teclado = new Teclado(document);
+			const animacao = new Animacao(context);
+
+			//recebendo imagem 
+			const imgMan = new Image();
+			imgMan.src = 'spritesheet.png';
+
+			const man = new Man(context, teclado, imgMan);
+			man.x = 0;
+			man.y = 200;
+			animacao.novoSprite(man);
+
+			imgMan.onload = () =>{
+				animacao.ligar();
+			}
+		</script>
+	</body>
+</html>
