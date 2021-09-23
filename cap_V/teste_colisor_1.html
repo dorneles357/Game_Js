@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Detecção de colisões</title>
+		<script src="colisor.js"></script>
+		<script src="bola.js"></script>
+	</head>
+
+	<body>
+		<canvas id="canvas_colisao" width="500" height="500"></canvas>
+		<script>
+			//contexto e referência
+			const canvas = document.getElementById('canvas_colisao');
+			const context = canvas.getContext('2d');
+
+			//instâncias bolas
+			const b1 = new Bola(context);
+			b1.x = 200;
+			b1.y = 200;
+			b1.velocidadeX = 10;
+			b1.velocidadeY = -5;
+			b1.cor = "blue";
+			b1.raio = 20;
+
+			const b2 = new Bola(context);
+			b2.x = 300;
+			b2.y = 200;
+			b2.velocidadeX = 10;
+			b2.velocidadeY = -5;
+			b2.cor = "blue";
+			b2.raio = 30;
+
+			//instânciando colisor
+			const colisor = new Colisor();
+			colisor.novoSprite(b1);
+			colisor.novoSprite(b2);
+			
+			colisor.aoColidir = function(s1, s2) { 
+				//alert(`Bateu!!`)
+			}
+			//animação
+			requestAnimationFrame(animar);
+
+			function animar(){
+				context.clearRect(0, 0, canvas.width, canvas.height);
+
+				b1.atualizar();
+				b2.atualizar();
+
+				b1.desenhar();
+				b2.desenhar();
+
+				//processar colisões
+				colisor.processar();
+
+				requestAnimationFrame(animar);
+			}
+		</script>
+	</body>
+</html>
