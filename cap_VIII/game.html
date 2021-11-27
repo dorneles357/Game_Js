@@ -10,6 +10,7 @@
     <script src="nave.js"></script>
     <script src="ovni.js"></script>
     <script src="tiro.js"></script>
+    <script src="spritesheet.js"></script>
     <title>Game</title>
   </head>
   <body>
@@ -34,7 +35,7 @@
           espaco: "fundo-espaco.png",
           estrelas: "fundo-estrelas.png",
           nuvens: "fundo-nuvens.png",
-          nave: "nave.png",
+          nave: "nave-spritesheet.png",
           ovni: "ovni.png",
         };
 
@@ -86,9 +87,9 @@
         nuvens.velocidade = 300;
 
         //nave
-        nave.x = canvas.width / 2 - imagens.nave.width / 2;
-        nave.y = canvas.height - imagens.nave.height;
-        nave.velocidade = 5;
+        nave.x = canvas.width / 2 - 36/2;
+        nave.y = canvas.height - 48;
+        nave.velocidade = 200;
 
         //tiro
         teclado.disparou(ESPACO, function () {

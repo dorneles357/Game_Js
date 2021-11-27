@@ -5,6 +5,10 @@ function Nave(context, teclado, imagem) {
   this.x = 0;
   this.y = 0;
   this.velocidade = 0;
+
+  this.spritesheet = new Spritesheets(context, imagem, 3, 2);
+  this.spritesheet.linha = 0;
+  this.spritesheet.intervalo = 100;
 }
 
 Nave.prototype = {
@@ -14,30 +18,28 @@ Nave.prototype = {
     if (this.teclado.pressionada(SETA_ESQUERDA) && this.x > 0)
       this.x -= incremento;
 
-    if (
-      this.teclado.pressionada(SETA_DIREITA) &&
-      this.x < this.context.canvas.width - this.imagem.width
-    )
+    if (this.teclado.pressionada(SETA_DIREITA) &&
+      this.x < this.context.canvas.width - 36)
       this.x += incremento;
 
     if (this.teclado.pressionada(SETA_ACIMA) && this.y > 0)
       this.y -= incremento;
 
-    if (
-      this.teclado.pressionada(SETA_ABAIXO) &&
-      this.y < this.context.canvas.height - this.imagem.height
-    )
+    if (this.teclado.pressionada(SETA_ABAIXO) &&
+      this.y < this.context.canvas.height - 48)
       this.y += incremento;
   },
 
   desenhar() {
-    this.context.drawImage(
-      this.imagem,
-      this.x,
-      this.y,
-      this.imagem.width,
-      this.imagem.height
-    );
+    if(this.teclado.pressionada(SETA_ESQUERDA))
+      this.spritesheet.linha = 1;
+    else if(this.teclado.pressionada(SETA_DIREITA))
+      this.spritesheet.linha = 2;
+    else
+      this.spritesheet.linha = 0;
+
+    this.spritesheet.desenhar(this.x, this.y);
+    this.spritesheet.proximoQuadro();
   },
 
   atirar() {
