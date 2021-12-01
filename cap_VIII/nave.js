@@ -1,7 +1,8 @@
-function Nave(context, teclado, imagem) {
+function Nave(context, teclado, imagem, imgExplosao) {
   this.context = context;
   this.teclado = teclado;
   this.imagem = imagem;
+  this.imgExplosao = imgExplosao;
   this.x = 0;
   this.y = 0;
   this.velocidade = 0;
@@ -71,7 +72,7 @@ Nave.prototype = {
       },
     ];
 
-    //desenhando retângulos para a visualização
+ /*   //desenhando retângulos para a visualização
     const ctx = this.context;
 
     for (item in rets) {
@@ -85,16 +86,29 @@ Nave.prototype = {
       );
 
       ctx.restore();
-    }
+    } */
     return rets;
   },
 
   colidiuCom(outro) {
     //se colidiu com um ovni
     if (outro instanceof Ovni) {
-      //fim de jogo !
-      this.animacao.desligar();
-      alert(`Game Over!`);
+      this.animacao.excluirSprite(this);
+      this.animacao.excluirSprite(outro);
+      this.colisor.excluirSprite(this);
+      this.colisor.excluirSprite(outro);
+
+      var exp1 = new Explosao(this.context, this.imgExplosao, this.x, this.y);
+
+      var exp2 = new Explosao(this.context, this.imgExplosao, outro.x, outro.y);
+
+      this.animacao.novoSprite(exp1);
+      this.animacao.novoSprite(exp2);
+
+      exp1.fimDaExplosao = () =>{
+        animacao.desligar();
+        alert("GAME OVER!")
+      }
     }
   },
 };

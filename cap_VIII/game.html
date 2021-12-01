@@ -11,6 +11,7 @@
     <script src="ovni.js"></script>
     <script src="tiro.js"></script>
     <script src="spritesheet.js"></script>
+    <script src="explosao.js"></script>
     <title>Game</title>
   </head>
   <body>
@@ -37,6 +38,7 @@
           nuvens: "fundo-nuvens.png",
           nave: "nave-spritesheet.png",
           ovni: "ovni.png",
+          explosao: 'explosao.png'
         };
 
         //carregar imagens
@@ -66,7 +68,7 @@
         espaco = new Fundo(ctx, imagens.espaco);
         estrelas = new Fundo(ctx, imagens.estrelas);
         nuvens = new Fundo(ctx, imagens.nuvens);
-        nave = new Nave(ctx, teclado, imagens.nave);
+        nave = new Nave(ctx, teclado, imagens.nave, imagens.explosao);
 
         //ligação entre objetos
         animacao.novoSprite(espaco);
@@ -119,7 +121,7 @@
 
       function novoOvni() {
         var imgOvni = imagens.ovni;
-        var ovni = new Ovni(ctx, imgOvni);
+        var ovni = new Ovni(ctx, imgOvni, imagens.explosao);
 
         //Min: 5, Max: 20
         ovni.velocidade = Math.floor(5 + Math.random() * (20 - 5 + 1));

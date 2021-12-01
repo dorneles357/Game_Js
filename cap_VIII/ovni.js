@@ -1,6 +1,7 @@
-function Ovni(context, imagem) {
+function Ovni(context, imagem, imgExplosao) {
   this.context = context;
   this.imagem = imagem;
+  this.imgExplosao = imgExplosao;
   this.x = 0;
   this.y = 0;
   this.velocidade = 0;
@@ -31,7 +32,7 @@ Ovni.prototype = {
       { x: this.x + 20, y: this.y + 23, largura: 25, altura: 7 },
     ];
 
-    //desenhar retângulos
+   /*//desenhar retângulos
     const ctx = this.context;
 
     for (item in rets) {
@@ -45,7 +46,7 @@ Ovni.prototype = {
       );
 
       ctx.restore();
-    }
+    }  */
 
     return rets;
   },
@@ -57,6 +58,9 @@ Ovni.prototype = {
       this.colisor.excluirSprite(this);
       this.animacao.excluirSprite(outro);
       this.colisor.excluirSprite(outro);
+
+      const explosao = new Explosao(this.context, this.imgExplosao, this.x, this.y);
+      this.animacao.novoSprite(explosao);
     }
   },
 };

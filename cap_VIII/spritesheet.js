@@ -24,6 +24,9 @@ Spritesheets.prototype = {
 			this.coluna ++;
 		else
 			this.coluna = 0;
+		
+		//avisar o fim do ciclo
+		if(this.fimDoCiclo) this.fimDoCiclo();
 
 		//guardar tempo da ultima mudança 
 		this.ultimoTempo  = agora;
