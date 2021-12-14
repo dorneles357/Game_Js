@@ -94,18 +94,31 @@
         nave.velocidade = 200;
 
         //tiro
-        teclado.disparou(ESPACO, function () {
-          nave.atirar();
-        });
+        ativarTiro(true)
 
         //pausa 
         teclado.disparou(ENTER, pausarJogo);
 
         function pausarJogo(){
-          if(animacao.ligado)
+          if(animacao.ligado){
             animacao.desligar();
-          else
+            ativarTiro(false);
+          }
+          else{
             animacao.ligar();
+            ativarTiro(true);
+          }
+
+        }
+
+        function ativarTiro(ativar){
+          if(ativar){
+            teclado.disparou(ESPACO, ()=>{
+              nave.atirar();
+            });
+          }else{
+            teclado.disparou(ESPACO, null);
+          }
         }
 
         animacao.ligar();
