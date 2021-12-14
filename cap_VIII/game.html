@@ -98,6 +98,16 @@
           nave.atirar();
         });
 
+        //pausa 
+        teclado.disparou(ENTER, pausarJogo);
+
+        function pausarJogo(){
+          if(animacao.ligado)
+            animacao.desligar();
+          else
+            animacao.ligar();
+        }
+
         animacao.ligar();
         criacaoInimigos();
       }
