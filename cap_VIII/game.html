@@ -103,6 +103,15 @@
           if(animacao.ligado){
             animacao.desligar();
             ativarTiro(false);
+
+            //Print: "Pausa"
+            ctx.save();
+            ctx.fillStyle = 'red';
+            ctx.strokeStyle = 'black';
+            ctx.font = '90px sans-serif';
+            ctx.fillText("Pausa", 160, 200);
+            ctx.strokeText("Pausa", 160, 200);
+            ctx.restore();
           }
           else{
             criador_inimigos.ultimoOvni = new Date().getTime();
