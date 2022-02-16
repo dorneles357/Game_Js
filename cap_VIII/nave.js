@@ -10,6 +10,9 @@ function Nave(context, teclado, imagem, imgExplosao) {
   this.spritesheet = new Spritesheets(context, imagem, 3, 2);
   this.spritesheet.linha = 0;
   this.spritesheet.intervalo = 100;
+
+  this.acabaramVidas = null;
+  this.vidasExtras = 3;
 }
 
 Nave.prototype = {
@@ -90,6 +93,12 @@ Nave.prototype = {
     return rets;
   },
 
+  posicionar(){
+    const canvas = this.context.canvas;
+    this.x = canvas.width / 2 - 18;
+    this.y = canvas.height - 48;
+  },
+
   colidiuCom(outro) {
     //se colidiu com um ovni
     if (outro instanceof Ovni) {
@@ -105,10 +114,19 @@ Nave.prototype = {
       this.animacao.novoSprite(exp1);
       this.animacao.novoSprite(exp2);
 
-      exp1.fimDaExplosao = () =>{
-        animacao.desligar();
-        alert("GAME OVER!")
+      const nave = this;
+      exp1.fimDaExplosao = ()=>{
+        nave.vidasExtras--;
+        if(nave.vidasExtras < 0){
+          if(nave.acabaramVidas) nave.acabaramVidas();
+        }else{
+          //recolocar a nave no engine
+          nave.colisor.novoSprite(nave);
+          nave.animacao.novoSprite(nave);
+
+          nave.posicionar();
+        }
+      }
       }
     }
-  },
-};
+  };
