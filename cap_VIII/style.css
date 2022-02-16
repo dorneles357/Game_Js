@@ -1,0 +1,21 @@
+#link_jogar{
+    display: none;
+
+    color: rgb(131, 226, 43);
+    background: url(img/botao-jogar.png);
+
+    font-size: 20px;
+    font-family: 'Courier New', Courier, monospace;
+
+    text-decoration: none;
+    text-shadow: 2px 2px 5px black;
+
+    position: absolute;
+    left: 220px;
+    top: 330px;
+    
+    width: 52px;
+    height: 26px;
+    padding: 23px 10px;
+
+}

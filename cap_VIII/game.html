@@ -12,10 +12,13 @@
     <script src="tiro.js"></script>
     <script src="spritesheet.js"></script>
     <script src="explosao.js"></script>
+    <link rel="stylesheet" href="style.css">
     <title>Game</title>
   </head>
   <body>
     <canvas id="game" width="500" height="500"></canvas>
+      <a id="link_jogar" href="javascript: iniciarJogo()">Jogar</a>
+    
 
     <script>
       //canvas e context
@@ -64,12 +67,45 @@
           musica_theme.load();
           musica_theme.volume = 0.8;
           musica_theme.loop = true;
-          musica_theme.play();
+          
         };
       
+      function mostrarLinkJogar(){
+        document.getElementById('link_jogar').style.display = 'block';
+      }
+
+      function iniciarJogo(){
+        document.getElementById('link_jogar').style.display = 'none';
+        musica_theme.play();
+        animacao.ligar();
+      }
+
       function carregando() {
+        ctx.save();
+        //fundo
+        ctx.drawImage(imagens.espaco, 0, 0, canvas.width, canvas.height)
+
+        //texto
+        ctx.fillStyle = "red";
+        ctx.strokeStyle = "black";
+        ctx.font = '50px sans-serif';
+        ctx.fillText("Load ...", 100, 200);
+        ctx.strokeText("Load ...", 100, 200);
+
+        //barra load
         carregadas++;
-        if (carregadas == total_imagens) iniciarObjetos();
+        
+        let tamanhoTotal = 300;
+        let tamanho = carregadas / total_imagens * tamanhoTotal;
+        ctx.fillStyle = 'blue';
+        ctx.fillRect(100, 250, tamanho, 50);
+
+        ctx.restore();
+
+        if(carregadas == total_imagens){
+          iniciarObjetos();
+          mostrarLinkJogar();
+        }
       }
 
       function iniciarObjetos() {
@@ -143,7 +179,7 @@
           }
         }
 
-        animacao.ligar();
+        
         criacaoInimigos();
       }
 
