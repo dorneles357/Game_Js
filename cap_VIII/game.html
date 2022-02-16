@@ -27,9 +27,12 @@
 
       let total_imagens = 0,
         carregadas = 0;
+      
+      var musica_theme;
 
       //carregando as imagens
       carregarImagens();
+      carregarMusicas();
 
       function carregarImagens() {
         imagens = {
@@ -55,6 +58,15 @@
         }
       }
 
+      function carregarMusicas(){
+          musica_theme = new Audio();
+          musica_theme.src = 'sound/musica_acao.mp3';
+          musica_theme.load();
+          musica_theme.volume = 0.8;
+          musica_theme.loop = true;
+          musica_theme.play();
+        };
+      
       function carregando() {
         carregadas++;
         if (carregadas == total_imagens) iniciarObjetos();
