@@ -76,9 +76,11 @@
       }
 
       function iniciarJogo(){
+        criador_inimigos.ultimoOvni = new Date().getTime();
         document.getElementById('link_jogar').style.display = 'none';
         musica_theme.play();
         animacao.ligar();
+        painel.pontuacao = 0;
       }
 
       function carregando() {
@@ -184,10 +186,18 @@
 
         criacaoInimigos();
 
+        //pontuação
+        colisor.aoColidir = (o1, o2)=>{
+          //tiro com ovni
+          if((o1 instanceof Tiro && o2 instanceof Ovni) || (o1 instanceof Ovni && o2 instanceof Tiro)){
+            painel.pontuacao += 10;
+          }
+        }
+
         //Game over 
         nave.acabaramVidas = ()=>{
           animacao.desligar();
-          alert('GAME OVER!')
+          gameover();
         }
         
       }
@@ -225,6 +235,50 @@
         animacao.novoSprite(ovni);
         colisor.novoSprite(ovni);
       }
-    </script>
+   
+      function gameover(){
+        //tiro
+        ativarTiro(false);
+
+        //pausar
+        teclado.disparou(ENTER, null);
+
+        //pausar musica
+        musica_theme.pause();
+        musica_theme.currentTime = 0.0;
+
+        //imagem de fundo
+        ctx.drawImage(imagens.espaco, 0, 0, canvas.width, canvas.height);
+
+        //frase final
+        ctx.save();
+        ctx.fillStyle = 'white';
+        ctx.strokeStyle = 'black';
+        ctx.font = '70px sans-serif';
+        ctx.fillText("GAME OVER", 40, 200);
+        ctx.strokeText("GAME OVER", 40, 200);
+        ctx.restore();
+
+        //jogar novamente
+        mostrarLinkJogar();
+
+        //reposicionar nave
+        nave.vidasExtras = 3;
+        nave.posicionar();
+        animacao.novoSprite(nave);
+        colisor.novoSprite(nave);
+
+        //remover ovnis
+        removerInimigos();
+      }
+
+      function removerInimigos(){
+        for(let i in animacao.sprites){
+          if(animacao.sprites[i] instanceof Ovni){
+            animacao.excluirSprite(animacao.sprites[i]);
+          }
+        }
+      }
+   </script>
   </body>
 </html>

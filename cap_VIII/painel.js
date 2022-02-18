@@ -4,6 +4,7 @@ function Painel(context, nave){
     this.spritesheet = new Spritesheets(context, nave.imagem, 3, 2);
     this.spritesheet.linha = 0;
     this.spritesheet.coluna = 0;
+    this.pontuacao = 0;
 }
 
 Painel.prototype = {
@@ -11,7 +12,9 @@ Painel.prototype = {
 
     },
     desenhar(){
-        this.context.scale(0.5, 0.5);
+        const ctx = this.context;
+        //vidas
+        ctx.scale(0.5, 0.5);
         
         let x = 20;
         let y = 20;
@@ -21,7 +24,14 @@ Painel.prototype = {
             x += 40;
         }
 
-        this.context.scale(2, 2);
+        ctx.scale(2, 2);
+
+        //pontuação
+        ctx.save();
+        ctx.fillStyle = 'white';
+        ctx.font = '18px sans-serif';
+        ctx.fillText(this.pontuacao, 100, 27);
+        ctx.restore();
     },
 
 }
