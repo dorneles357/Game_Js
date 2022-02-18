@@ -3,13 +3,13 @@ function Ovni(context, imagem, imgExplosao) {
   this.imagem = imagem;
   this.imgExplosao = imgExplosao;
   this.x = 0;
-  this.y = 0;
+  this.y = 0; 
   this.velocidade = 0;
 }
 
 Ovni.prototype = {
   atualizar() {
-    this.y += this.velocidade;
+    this.y += this.velocidade * this.animacao.decorrido /50;
 
     //excluir quando sumir da tela
     if (this.y > this.context.canvas.height) {

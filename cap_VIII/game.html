@@ -1,11 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="animacao_final.js"></script>
     <script src="teclado.js"></script>
-    <script src="colisor.js"></script>
+    <script src="colisor.js"></script> 
     <script src="fundo.js"></script>
     <script src="nave.js"></script>
     <script src="ovni.js"></script>
@@ -23,13 +21,13 @@
 
     <script>
       //canvas e context
-      const canvas = document.getElementById("game");
-      const ctx = canvas.getContext("2d");
+      var canvas = document.getElementById("game");
+      var ctx = canvas.getContext("2d");
 
       //variáveis principais
-      let imagens, animacao, teclado, colisor, nave, criador_inimigos;
+     var imagens, animacao, teclado, colisor, nave, criador_inimigos;
 
-      let total_imagens = 0,
+      var total_imagens = 0,
         carregadas = 0;
       
       var musica_theme;
@@ -152,6 +150,35 @@
         //pausa 
         teclado.disparou(ENTER, pausarJogo);
 
+
+        criacaoInimigos();
+
+        //Game over 
+        nave.acabaramVidas = ()=>{
+          animacao.desligar();
+          gameover();
+        }
+
+        //pontuação
+        colisor.aoColidir = (o1, o2)=>{
+          //tiro com ovni
+          if((o1 instanceof Tiro && o2 instanceof Ovni) || (o1 instanceof Ovni && o2 instanceof Tiro)){
+            painel.pontuacao += 10;
+          }
+        }
+        
+      }
+
+      function ativarTiro(ativar){
+          if(ativar){
+            teclado.disparou(ESPACO, ()=>{
+              nave.atirar();
+            });
+          }else{
+            teclado.disparou(ESPACO, null);
+          }
+        }
+
         function pausarJogo(){
           if(animacao.ligado){
             animacao.desligar();
@@ -173,34 +200,6 @@
           }
 
         }
-
-        function ativarTiro(ativar){
-          if(ativar){
-            teclado.disparou(ESPACO, ()=>{
-              nave.atirar();
-            });
-          }else{
-            teclado.disparou(ESPACO, null);
-          }
-        }
-
-        criacaoInimigos();
-
-        //pontuação
-        colisor.aoColidir = (o1, o2)=>{
-          //tiro com ovni
-          if((o1 instanceof Tiro && o2 instanceof Ovni) || (o1 instanceof Ovni && o2 instanceof Tiro)){
-            painel.pontuacao += 10;
-          }
-        }
-
-        //Game over 
-        nave.acabaramVidas = ()=>{
-          animacao.desligar();
-          gameover();
-        }
-        
-      }
 
       function criacaoInimigos() {
         criador_inimigos = {

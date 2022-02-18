@@ -58,10 +58,10 @@ Animacao.prototype = {
 
     });
   },
-  limparTela: function () {
+/*   limparTela: function () {
     var ctx = this.context;
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-  },
+  }, */
 
   novoProcessamento: function (processamento) {
     this.processamentos.push(processamento);

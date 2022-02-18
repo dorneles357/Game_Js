@@ -6,6 +6,7 @@ function Spritesheets(context, imagem, linhas, colunas){
 	this.intervalo = 0;
 	this.linha = 0;
 	this.coluna = 0;
+	this.fimDoCiclo = null;
 }
 
 Spritesheets.prototype = {

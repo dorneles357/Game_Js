@@ -10,7 +10,11 @@ function Explosao(context, imagem, x, y){
     this.spriteseet.intervalo = 50;
     this.x = x;
     this.y = y;
+    this.animando = false;
+
     var explosao = this;
+    this.fimDaExplosao = null;
+    
     this.spriteseet.fimDoCiclo = () =>{
         explosao.animacao.excluirSprite(explosao);
 

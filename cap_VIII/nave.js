@@ -75,8 +75,8 @@ Nave.prototype = {
       },
     ];
 
- /*   //desenhando retângulos para a visualização
-    const ctx = this.context;
+   //desenhando retângulos para a visualização
+/*     const ctx = this.context;
 
     for (item in rets) {
       ctx.save();
@@ -93,12 +93,6 @@ Nave.prototype = {
     return rets;
   },
 
-  posicionar(){
-    const canvas = this.context.canvas;
-    this.x = canvas.width / 2 - 18;
-    this.y = canvas.height - 48;
-  },
-
   colidiuCom(outro) {
     //se colidiu com um ovni
     if (outro instanceof Ovni) {
@@ -113,8 +107,9 @@ Nave.prototype = {
 
       this.animacao.novoSprite(exp1);
       this.animacao.novoSprite(exp2);
+      
 
-      const nave = this;
+      var nave = this;
       exp1.fimDaExplosao = ()=>{
         nave.vidasExtras--;
         if(nave.vidasExtras < 0){
@@ -123,10 +118,16 @@ Nave.prototype = {
           //recolocar a nave no engine
           nave.colisor.novoSprite(nave);
           nave.animacao.novoSprite(nave);
-
+          
           nave.posicionar();
+          }
         }
       }
-      }
-    }
+    },
+
+    posicionar(){
+      let canvas = this.context.canvas;
+      this.x = canvas.width / 2 - 18;
+      this.y = canvas.height - 48;
+    },
   };
